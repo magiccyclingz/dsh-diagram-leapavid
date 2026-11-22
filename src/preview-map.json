@@ -1,0 +1,252 @@
+[
+ {
+  "slug": "architecture",
+  "zh": "架构图",
+  "file": "example-architecture.html"
+ },
+ {
+  "slug": "architecture-delta",
+  "zh": "架构变更对比",
+  "file": "example-architecture-delta.html"
+ },
+ {
+  "slug": "axonometric-plan",
+  "zh": "轴测平面",
+  "file": "example-axonometric-plan.html"
+ },
+ {
+  "slug": "bar",
+  "zh": "柱状图",
+  "file": "example-bar.html"
+ },
+ {
+  "slug": "data-flow",
+  "zh": "数据流图",
+  "file": "example-data-flow.html"
+ },
+ {
+  "slug": "db-schema",
+  "zh": "数据库结构",
+  "file": "example-db-schema.html"
+ },
+ {
+  "slug": "dependency",
+  "zh": "依赖关系",
+  "file": "example-dependency.html"
+ },
+ {
+  "slug": "deployment",
+  "zh": "部署拓扑",
+  "file": "example-deployment.html"
+ },
+ {
+  "slug": "dp-integration",
+  "zh": "数据集成",
+  "file": "example-dp-integration.html"
+ },
+ {
+  "slug": "dp-security-matrix",
+  "zh": "数据安全矩阵",
+  "file": "example-dp-security-matrix.html"
+ },
+ {
+  "slug": "er",
+  "zh": "实体关系 ER",
+  "file": "example-er.html"
+ },
+ {
+  "slug": "event-modeling",
+  "zh": "事件建模",
+  "file": "example-event-modeling.html"
+ },
+ {
+  "slug": "exploded",
+  "zh": "爆炸视图",
+  "file": "example-exploded.html"
+ },
+ {
+  "slug": "fishbone",
+  "zh": "鱼骨图",
+  "file": "example-fishbone.html"
+ },
+ {
+  "slug": "flowchart",
+  "zh": "流程图",
+  "file": "example-flowchart.html"
+ },
+ {
+  "slug": "gantt",
+  "zh": "甘特图",
+  "file": "example-gantt.html"
+ },
+ {
+  "slug": "heatmap",
+  "zh": "热力图",
+  "file": "example-heatmap.html"
+ },
+ {
+  "slug": "high-level",
+  "zh": "高层概览",
+  "file": "example-high-level.html"
+ },
+ {
+  "slug": "it-state",
+  "zh": "IT 现状",
+  "file": "example-it-state.html"
+ },
+ {
+  "slug": "kanban",
+  "zh": "看板",
+  "file": "example-kanban.html"
+ },
+ {
+  "slug": "layers",
+  "zh": "分层架构",
+  "file": "example-layers.html"
+ },
+ {
+  "slug": "line",
+  "zh": "折线图",
+  "file": "example-line.html"
+ },
+ {
+  "slug": "loop",
+  "zh": "循环模型",
+  "file": "example-loop.html"
+ },
+ {
+  "slug": "medallion",
+  "zh": "数据分层",
+  "file": "example-medallion.html"
+ },
+ {
+  "slug": "nested",
+  "zh": "嵌套结构",
+  "file": "example-nested.html"
+ },
+ {
+  "slug": "org-chart",
+  "zh": "组织架构",
+  "file": "example-org-chart.html"
+ },
+ {
+  "slug": "polar",
+  "zh": "极坐标图",
+  "file": "example-polar.html"
+ },
+ {
+  "slug": "process",
+  "zh": "过程图",
+  "file": "example-process.html"
+ },
+ {
+  "slug": "pyramid",
+  "zh": "金字塔",
+  "file": "example-pyramid.html"
+ },
+ {
+  "slug": "quadrant",
+  "zh": "四象限",
+  "file": "example-quadrant.html"
+ },
+ {
+  "slug": "radar",
+  "zh": "雷达图",
+  "file": "example-radar.html"
+ },
+ {
+  "slug": "requirement-traceability",
+  "zh": "需求追溯",
+  "file": "example-requirement-traceability.html"
+ },
+ {
+  "slug": "sankey",
+  "zh": "桑基图",
+  "file": "example-sankey.html"
+ },
+ {
+  "slug": "sbgn",
+  "zh": "通路图 SBGN",
+  "file": "example-sbgn.html"
+ },
+ {
+  "slug": "scatter",
+  "zh": "散点图",
+  "file": "example-scatter.html"
+ },
+ {
+  "slug": "sequence",
+  "zh": "时序图",
+  "file": "example-sequence.html"
+ },
+ {
+  "slug": "service-blueprint",
+  "zh": "服务蓝图",
+  "file": "example-service-blueprint.html"
+ },
+ {
+  "slug": "state",
+  "zh": "状态机",
+  "file": "example-state.html"
+ },
+ {
+  "slug": "steps",
+  "zh": "步骤图",
+  "file": "example-steps.html"
+ },
+ {
+  "slug": "swimlane",
+  "zh": "泳道图",
+  "file": "example-swimlane.html"
+ },
+ {
+  "slug": "timeline",
+  "zh": "时间轴",
+  "file": "example-timeline.html"
+ },
+ {
+  "slug": "tree",
+  "zh": "树状图",
+  "file": "example-tree.html"
+ },
+ {
+  "slug": "treemap",
+  "zh": "矩形树图",
+  "file": "example-treemap.html"
+ },
+ {
+  "slug": "uml-class",
+  "zh": "UML 类图",
+  "file": "example-uml-class.html"
+ },
+ {
+  "slug": "unit-grid",
+  "zh": "单元网格",
+  "file": "example-unit-grid.html"
+ },
+ {
+  "slug": "journey",
+  "zh": "用户旅程",
+  "file": "example-journey.html"
+ },
+ {
+  "slug": "story-map",
+  "zh": "故事地图",
+  "file": "example-story-map.html"
+ },
+ {
+  "slug": "venn",
+  "zh": "韦恩图",
+  "file": "example-venn.html"
+ },
+ {
+  "slug": "wardley",
+  "zh": "沃德利地图",
+  "file": "example-wardley.html"
+ },
+ {
+  "slug": "waterfall",
+  "zh": "瀑布图",
+  "file": "example-waterfall.html"
+ }
+]

@@ -1,0 +1,38 @@
+{
+  "name": "dsh-diagram-leapavid",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Diagram LeapAvid — browse the 50 editorial diagram types and generate one from a form in the DSH sidebar.",
+  "author": "LeapAvid",
+  "license": "MIT",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./icon": "./icon.svg",
+    "./locale/*": "./locale/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md",
+    "docs",
+    "locale"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  }
+}
