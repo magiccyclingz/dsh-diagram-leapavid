@@ -6,6 +6,14 @@
   "description": "Diagram LeapAvid — browse the 50 editorial diagram types and generate one from a form in the DSH sidebar.",
   "author": "LeapAvid",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magiccyclingz/dsh-diagram-leapavid.git"
+  },
+  "homepage": "https://github.com/magiccyclingz/dsh-diagram-leapavid#readme",
+  "bugs": {
+    "url": "https://github.com/magiccyclingz/dsh-diagram-leapavid/issues"
+  },
   "main": "./index.js",
   "exports": {
     ".": "./index.js",
@@ -23,7 +31,8 @@
     "LICENSE",
     "THIRD-PARTY-NOTICES.md",
     "docs",
-    "locale"
+    "locale",
+    "screenshots.json"
   ],
   "dsh": {
     "bundle": {
