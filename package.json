@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Diagram LeapAvid — browse the 50 editorial diagram types and generate one from a form in the DSH sidebar.",
+  "description": "Diagram LeapAvid — browse 50 editorial diagram templates and prepare a prompt that opens a new DSH conversation to generate a single-file HTML diagram.",
   "author": "LeapAvid",
   "license": "MIT",
   "repository": {
