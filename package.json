@@ -1,6 +1,6 @@
 {
   "name": "dsh-diagram-leapavid",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "description": "Diagram LeapAvid — browse 50 editorial diagram types, pick from 10 brand palettes, and generate single-file HTML diagrams with a bundled diagram-design spec and progressive prompt injection; no external skill or plugin required.",
   "author": "LeapAvid",

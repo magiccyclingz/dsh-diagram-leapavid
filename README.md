@@ -69,9 +69,9 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 ### 从 npm 安装
 
 本插件已发布到 npm：[dsh-diagram-leapavid](https://www.npmjs.com/package/dsh-diagram-leapavid)。
-当前仓库版本为 **0.4.0**。
+当前仓库版本为 **0.4.1**。
 
-> **注意：0.4.0 尚未发布到 npm。** npm 上目前的 `0.1.1` 是内置规范与配色之前的旧版，不包含本页描述的 `skill/` 规范、10 套配色、`/api/diagram-leapavid/prompt` 路由与默认精简注入。要用内置生成，请按下面的「从本地仓库安装 / 开发」；等 0.4.0 发布后再用这条命令。
+> 0.4.0 已发布到 npm，包含内置 `skill/` 规范、10 套配色、`/api/diagram-leapavid/prompt` 路由与默认精简注入。0.4.1 仅修正本段发布状态说明。
 
 ```bash
 dsh plugin --profile desktop add dsh-diagram-leapavid
