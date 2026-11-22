@@ -1,6 +1,6 @@
 # LeapAvid图表工坊
 
-> DSH 侧栏里的 50 种编辑级图表工作台。选一种图型、挑一套品牌配色、填一张表，直接在新会话里生成一张可发布的单文件 HTML 图表。
+> DSH 侧栏里的 50 种编辑级图表工作台。选一种图型、挑一套品牌配色、填一张表，直接在新会话里生成一张可发布的单文件 HTML 图表。默认只注入核心规范，也可以按需切换完整规范。
 
 ![LeapAvid图表工坊列表页](docs/screenshot-list.png)
 
@@ -25,8 +25,10 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 - **50 种图型**：架构图、架构变更对比、流程图、数据流、ER、甘特图、四象限、
   鱼骨图、桑基图、用户旅程、服务蓝图、Wardley 地图等，覆盖系统、产品、数据与
   组织场景。
-- **内置完整规范**：插件自带 `diagram-design` 的 SKILL.md、70 份 references
-  与 5 个 HTML 起始模板；生成时按需注入，不联网、不读外部技能目录。
+- **内置完整规范，按需注入**：插件自带 `diagram-design` 的 SKILL.md、70 份 references
+  与 5 个 HTML 起始模板，不联网、不读外部技能目录。默认「精简」只内联核心规范、
+  本次图型与模板（约 45–85 KB），更细的参考按需读取；也可以一键切到「完整」，
+  把全部参考内联（约 130–180 KB）。
 - **列表页**：每张卡片带一张官方示例预览图，下面是中文名、英文名与技能原文的
   “适合用来画什么”；支持按中文名、英文名或用途即时搜索。
 - **详情页**：正文列顶部是该图型的官方示例大图（点击全屏放大），下面依次是
@@ -41,8 +43,8 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 - **一键生成**：提交后先向宿主请求内置规范提示词，再新建会话、打开它，并把
   图型、风格与内容写进提示词；模型直接产出单文件 HTML，保存到工作区
   `diagrams/`。
-- **复制提示词**：不想现在生成时，可以把整段（约 115–180 KB）提示词复制到任意
-  会话里自己用。
+- **复制提示词**：不想现在生成时，可以把整段提示词复制到任意会话里自己用。
+  默认精简规范约 45–85 KB，切到完整规范约 130–180 KB。
 - **响应式**：列表用 `auto-fill / minmax(248px, 1fr)` 铺满面板；详情页用容器查询
   跟随面板宽度切换两栏 / 单栏，而不是跟随窗口。
 
@@ -55,7 +57,7 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 | 依赖 | 说明 |
 | --- | --- |
 | DeepSeek Harness | 桌面版，已在 **0.2.x** 验证；需要支持客户端插件与侧栏槽位 |
-| 会话模型 | 需要能接收长提示词并写文件；插件默认要求模型使用 `write` 落盘 |
+| 会话模型 | 需要能接收中等长度提示词并写文件；默认精简规范约 45–85 KB，插件要求模型使用 `write` 落盘 |
 | Node.js | 仅在开发 / 重新生成数据时需要；运行插件本身不需要额外 Node 进程 |
 
 > 不再需要 `dsh-ai-diagrams`、`diagram-design` 技能或 `diagram_save`。
@@ -67,9 +69,9 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 ### 从 npm 安装
 
 本插件已发布到 npm：[dsh-diagram-leapavid](https://www.npmjs.com/package/dsh-diagram-leapavid)。
-当前仓库版本为 **0.3.0**。
+当前仓库版本为 **0.4.0**。
 
-> **注意：0.3.0 尚未发布到 npm。** npm 上目前的 `0.1.1` 是内置规范与配色之前的旧版，不包含本页描述的 `skill/` 规范、10 套配色与 `/api/diagram-leapavid/prompt` 路由。要用内置生成，请按下面的「从本地仓库安装 / 开发」；等 0.3.0 发布后再用这条命令。
+> **注意：0.4.0 尚未发布到 npm。** npm 上目前的 `0.1.1` 是内置规范与配色之前的旧版，不包含本页描述的 `skill/` 规范、10 套配色、`/api/diagram-leapavid/prompt` 路由与默认精简注入。要用内置生成，请按下面的「从本地仓库安装 / 开发」；等 0.4.0 发布后再用这条命令。
 
 ```bash
 dsh plugin --profile desktop add dsh-diagram-leapavid
@@ -124,6 +126,8 @@ ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
    - **图名**：会作为图表的标题。
    - **内容 / 数据**：每行一个节点、一条连线或一组数字；也可以直接写一段业务描述。
    - **风格**：Full editorial / Minimal light / Minimal dark。
+   - **规范注入**：默认「精简 · 推荐」，只内联核心规范、本次图型与模板；切到
+     「完整」则把全部参考内联。样式与配色不变，只影响提示词长度和细节量。
    - **配色**：10 套品牌配色任选，卡片上有 6 段色盘和中文说明；不选则用内置
      烟白纸 + 焦橙。选 **内置默认** 可随时恢复。
    - **可选叠加**：手绘 sketchy、终端 terminal、动效 motion。终端皮肤固定黑底
@@ -149,15 +153,18 @@ skill/SKILL.md + references + templates ─┐
 
 - `index.js` 是宿主侧：注册 `/api/diagram-leapavid/health`、
   `/api/diagram-leapavid/palettes` 与 `/api/diagram-leapavid/prompt`，校验图型、
-  风格、配色和内容，按需拼出 SKILL.md、style-guide、primitives、type-*.md、
-  起始模板，以及一段覆盖 `style-guide` token 的品牌配色约束。
+  风格、配色、内容与规范档位（`spec`）。默认 `compact`：拼出核心 SKILL 章节、
+  style-guide、primitives、layout budget、type-*.md、去示例模板，并附按需查阅
+  路径；`full`：把 semantic-patterns、output-spec 等全部参考内联。两者都可追加
+  一段覆盖 `style-guide` token 的品牌配色约束。
 - `client.js` 是 DSH 的客户端 bundle：注册侧栏入口与面板，包含 React UI、样式，
   以及内联的图型文案 `DATA`、列表预览图 `PREVIEWS`、详情大图
   `PREVIEWS_DETAIL`。配色由 `/palettes` 接口读取，不内联。
 - 图型文案和预览图全部内联，打开面板不需要联网，也不依赖本地图片文件。
-- 提示词头部有明确的执行契约：不要安装或调用任何技能、不要读 references 路径、
-  跳过上游 SKILL 的首次提问门禁、不要使用 `diagram_save`，直接用 `write`
-  把单文件 HTML 写到工作区 `diagrams/`。
+- 提示词头部有明确的执行契约：不要安装或调用任何技能、不要使用 `diagram_save`，
+  跳过上游 SKILL 的首次提问门禁，直接用 `write` 把单文件 HTML 写到工作区
+  `diagrams/`。精简规范允许按需读取本次图型相关参考；完整规范已内联全部参考，
+  不再要求读 references。
 
 ## 目录结构
 
@@ -165,6 +172,7 @@ skill/SKILL.md + references + templates ─┐
 .
 ├── client.js                 # DSH 客户端 bundle：UI + DATA + PREVIEWS（生成物）
 ├── index.js                  # 宿主入口：内置规范与配色路由
+├── lib/compact-spec.js       # 精简规范抽段、去示例模板、按需查阅路径
 ├── palettes.json             # 10 套品牌配色与 role token
 ├── cordis.patch.yml          # 插件声明
 ├── icon.svg                  # 侧栏图标
@@ -186,7 +194,7 @@ skill/SKILL.md + references + templates ─┐
 │   ├── embed-data.mjs        # 内联图型文案到 client.js
 │   ├── sync-skill.mjs        # 从上游 checkout 同步 skill/
 │   ├── test-palettes.mjs     # 配色数量、token 格式与对比度校验
-│   └── test-prompt.mjs       # 50 图型 + 5 变体 + 10 配色的提示词测试
+│   └── test-prompt.mjs       # 50 图型 + 5 变体 + 10 配色 + 精简/完整注入测试
 ├── docs/                     # README 截图（仅插件面板，不含 DSH 左栏）
 ├── LICENSE                   # MIT 许可全文
 └── THIRD-PARTY-NOTICES.md    # 第三方版权与 MIT 许可全文
@@ -221,11 +229,13 @@ node scripts/embed-data.mjs
 访问 `/api/diagram-leapavid/health` 检查；如果宿主没有创建会话，面板会给出提示。
 也可以先用「复制提示词」手动发到会话里。
 
-**提示词为什么这么大？**
-为了保证图表严格符合 `diagram-design` 的布局与连线规则，提示词会把本次图型
-需要的 SKILL.md、设计系统、图元、布局预算、输出规范和起始模板一起注入，通常
-在 115–180 KB。内容越复杂，模型越需要这些约束。选了品牌配色时，还会多一段
-覆盖 token 的配色约定，但仍在同一量级。
+**提示词为什么这么大？可以短一点吗？**
+为了保证图表严格符合 `diagram-design` 的布局与连线规则，提示词需要带上前面的
+规范。插件默认用「精简」：只内联核心 SKILL 章节、设计系统、图元、布局预算、
+本次图型的布局章节和去示例模板，通常在 45–85 KB，并附按需查阅路径；模型仍可
+在需要时读取单个参考文件。表单里切到「完整」会把 semantic-patterns、output-spec
+等全部参考内联，通常在 130–180 KB，适合复杂图或复制到其他模型。选了品牌配色
+时，还会多一段覆盖 token 的配色约定，但仍在同一量级。
 
 **配色会改掉风格吗？**
 不会。配色只覆盖 `style-guide` 里的纸、墨、发丝线、强调色与链接色；

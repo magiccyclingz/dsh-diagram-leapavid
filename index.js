@@ -9,6 +9,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { compactSkill, compactStyleGuide, compactType, compactTemplate, lookupSection } from './lib/compact-spec.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SKILL_ROOT = path.join(HERE, 'skill')
@@ -16,6 +17,7 @@ const REFS = path.join(SKILL_ROOT, 'references')
 const ROUTE = '/api/diagram-leapavid'
 const SLUG_RE = /^[a-z0-9][a-z0-9-]*$/
 const VARIANTS = new Set(['full editorial', 'minimal light', 'minimal dark'])
+const SPECS = new Set(['compact', 'full'])
 const PALETTES_FILE = path.join(HERE, 'palettes.json')
 let paletteCache = null
 
@@ -174,6 +176,7 @@ function section(label, text) {
 export async function composePrompt(input = {}) {
   const slug = String(input.slug || '').trim()
   if (!SLUG_RE.test(slug)) throw new HttpError(400, '图型 id 不合法')
+  const spec = SPECS.has(input.spec) ? input.spec : 'compact'
   const variant = VARIANTS.has(input.variant) ? input.variant : 'full editorial'
   const sketchy = Boolean(input.sketchy)
   const terminal = Boolean(input.terminal)
@@ -190,27 +193,51 @@ export async function composePrompt(input = {}) {
   const templateName = variantTemplate(variant, terminal, motion)
   const template = await readSkill('templates/' + templateName)
 
-  const parts = [
-    section('A · diagram-design 技能主文件（SKILL.md）', await readSkill('SKILL.md')),
-    section('B · 设计系统与 token（style-guide.md）', await readSkill('references/style-guide.md')),
-    section('C · SVG 图元与六条强制连线规则（primitives-core.md）', await readSkill('references/primitives-core.md')),
-    section('D · 语义模式（semantic-patterns.md）', await readSkill('references/semantic-patterns.md')),
-    section('E · 布局预算（layout-budget.md）', await readSkill('references/layout-budget.md')),
-    section('F · 输出规格（output-spec.md）', await readSkill('references/output-spec.md')),
-    section('G · 注释气泡（primitive-annotation.md）', await readSkill('references/primitive-annotation.md')),
-    section('H · 本次图型（type-' + slug + '.md）', typeRef),
-    section('I · 起始模板（' + templateName + '）', template),
-  ]
-  if (sketchy) parts.push(section('J · 手绘变体（primitive-sketchy.md）', await readSkill('references/primitive-sketchy.md')))
-  if (terminal) parts.push(section('K · 终端变体（primitive-terminal.md）', await readSkill('references/primitive-terminal.md')))
-  if (motion) parts.push(section('L · 动效（animation.md）', await readSkill('references/animation.md')))
-  if (palette) parts.push(section('M · 本次品牌配色（覆盖 style-guide token）', paletteSection(palette)))
+  const parts = []
+  if (spec === 'full') {
+    parts.push(
+      section('A · diagram-design 技能主文件（SKILL.md）', await readSkill('SKILL.md')),
+      section('B · 设计系统与 token（style-guide.md）', await readSkill('references/style-guide.md')),
+      section('C · SVG 图元与六条强制连线规则（primitives-core.md）', await readSkill('references/primitives-core.md')),
+      section('D · 语义模式（semantic-patterns.md）', await readSkill('references/semantic-patterns.md')),
+      section('E · 布局预算（layout-budget.md）', await readSkill('references/layout-budget.md')),
+      section('F · 输出规格（output-spec.md）', await readSkill('references/output-spec.md')),
+      section('G · 注释气泡（primitive-annotation.md）', await readSkill('references/primitive-annotation.md')),
+      section('H · 本次图型（type-' + slug + '.md）', typeRef),
+      section('I · 起始模板（' + templateName + '）', template),
+    )
+  } else {
+    const [skill, styleGuide, primitives, layout, annotation] = await Promise.all([
+      readSkill('SKILL.md'),
+      readSkill('references/style-guide.md'),
+      readSkill('references/primitives-core.md'),
+      readSkill('references/layout-budget.md'),
+      readSkill('references/primitive-annotation.md'),
+    ])
+    parts.push(
+      section('A · 核心原则与前置自检（SKILL.md 节选）', compactSkill(skill)),
+      section('B · 设计 token / 字体 / 版式（style-guide.md 节选）', compactStyleGuide(styleGuide, content)),
+      section('C · SVG 图元与六条强制连线规则（primitives-core.md）', primitives),
+      section('D · 布局预算（layout-budget.md）', layout),
+      section('E · 注释气泡（primitive-annotation.md）', annotation),
+      section('F · 本次图型（type-' + slug + '.md 基础章节）', compactType(typeRef)),
+      section('G · 起始模板（' + templateName + '，已去掉示例节点）', compactTemplate(template)),
+      section('H · 按需查阅（完整参考路径）', lookupSection(slug, SKILL_ROOT, REFS)),
+    )
+  }
+  let next = parts.length
+  const nextSection = (label, text) => section(String.fromCharCode(65 + next++) + ' · ' + label, text)
+  if (sketchy) parts.push(nextSection('手绘变体（primitive-sketchy.md）', await readSkill('references/primitive-sketchy.md')))
+  if (terminal) parts.push(nextSection('终端变体（primitive-terminal.md）', await readSkill('references/primitive-terminal.md')))
+  if (motion) parts.push(nextSection('动效（animation.md）', await readSkill('references/animation.md')))
+  if (palette) parts.push(nextSection('本次品牌配色（覆盖 style-guide token）', paletteSection(palette)))
 
   const extras = []
   if (sketchy) extras.push('手绘 sketchy 笔触')
   if (terminal) extras.push('终端 terminal 外框')
   if (motion) extras.push('进场动效 motion（无 JS 时也必须是一张完整的静态图）')
   const styleLine = variant + (extras.length ? ' + ' + extras.join(' + ') : '') + (palette ? ' + 配色 ' + palette.name : '')
+  const specLabel = spec === 'full' ? '完整（全部参考内联）' : '精简（核心规范 + 本次图型 + 模板）'
 
   const header = [
     '# LeapAvid 图表工坊 · 直接生成任务',
@@ -222,12 +249,15 @@ export async function composePrompt(input = {}) {
     '- 图型：' + typeName + ' / ' + typeTitle + '（slug: ' + slug + '）',
     '- 图名：' + name,
     '- 风格：' + styleLine,
+    '- 规范注入：' + specLabel,
     '- 输出文件：diagrams/' + filename + '.html（相对当前工作区）',
     '- 交付：单文件 HTML，内联 SVG；中文界面文案；不要引用任何外部图片或脚本。',
     '',
     '## 执行契约（优先级高于下方规范中的流程门禁）',
     '',
-    '1. 所有规范已经内联在本文中。不要调用 skill 工具，不要安装任何插件/技能，不要读取 SKILL.md、references/、assets/、scripts/ 里的文件；正文里的这些路径只是章节来源标签。',
+    '1. ' + (spec === 'full'
+      ? '所有规范已经内联在本文中。不要调用 skill 工具，不要安装任何插件/技能，不要读取 SKILL.md、references/、assets/、scripts/ 里的文件；正文里的这些路径只是章节来源标签。'
+      : '核心规范已经内联在本文中。不要调用 skill 工具，不要安装任何插件/技能；只有「按需查阅」列出的完整参考在内联规范没有覆盖时，才按需读取单个文件的相关章节，不要整篇读入，也不要因为读不到而阻塞。'),
     '2. 跳过 SKILL.md §0 的首次风格门禁和 §3 的「Confirm before drawing」。用户已经选定风格并提交；默认 token 直接用，不要反问，也不要在聊天里先贴计划。',
     '3. 不要使用 diagram_save，本环境没有这个工具。用 write 工具把完整 HTML 写到上面指定的 diagrams/' + filename + '.html；如果目录不存在，先执行 mkdir -p diagrams。',
     '4. 不要运行 scripts/self_check.py、verify_geometry.py、export_png.py（本包没有附带这些脚本）。改为按规范 §9 与六条连线规则人工自检；如本机有 Chrome，可选渲染一张 2x PNG 预览到 diagrams/' + filename + '.png，失败就跳过，不要阻塞交付。',
@@ -239,7 +269,7 @@ export async function composePrompt(input = {}) {
     '',
     content,
     '',
-    '## 内置规范（按顺序阅读；冲突时以「执行契约」和本次图型文件为准）',
+    '## 内置规范（' + (spec === 'full' ? '完整参考，按顺序阅读' : '精简版，先读核心再读图型') + '；冲突时以「执行契约」和本次图型文件为准）',
   ].join('\n')
 
   const prompt = header + parts.join('')
@@ -247,6 +277,7 @@ export async function composePrompt(input = {}) {
     prompt,
     slug,
     filename,
+    spec,
     template: templateName,
     style: styleLine,
     palette: palette ? { id: palette.id, name: palette.name, mode: palette.mode, source: palette.source } : null,
@@ -281,6 +312,7 @@ export function apply(ctx) {
             bundled: true,
             types: await countTypes(),
             palettes: (await readPalettes()).palettes.length,
+            specs: Array.from(SPECS),
           })
           return
         }
