@@ -55,25 +55,16 @@ profile 的依赖。装好后确认技能目录里有 `diagram-design`，并且
 
 ### 2. 安装本插件
 
-开发模式下直接把仓库软链到 desktop profile：
+本插件已发布到 npm：[dsh-diagram-leapavid](https://www.npmjs.com/package/dsh-diagram-leapavid)（当前 0.1.0）。
+
+推荐用 DSH 的插件命令装进 desktop profile：
 
 ```bash
-ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
+dsh plugin --profile desktop add dsh-diagram-leapavid
 ```
 
-然后在 `~/.dsh/profiles/desktop/package.json` 里做两件事：
-
-1. 把包加进 `dependencies`（用绝对路径的 `file:` 依赖，或让包管理器安装）：
-
-```json
-{
-  "dependencies": {
-    "dsh-diagram-leapavid": "file:/absolute/path/to/dsh-diagram-leapavid"
-  }
-}
-```
-
-2. 把包名加进 `dsh.profile.bundles`：
+装好后确认 `~/.dsh/profiles/desktop/package.json` 的 `dsh.profile.bundles` 里包含
+`"dsh-diagram-leapavid"`。如果插件命令只装了依赖、没有写入 bundles，手动补上：
 
 ```json
 {
@@ -90,8 +81,27 @@ ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
 
 改完后重启 DSH。侧栏应该出现 **LeapAvid图表工坊** 入口，点开能看到 50 张图型卡片。
 
-> 如果侧栏没有出现，先检查包名是否写进了 `bundles`、软链是否指向正确的目录，
-> 再看 DSH 日志里有没有 client bundle 404。
+> 如果侧栏没有出现，先检查包名是否写进了 `bundles`，再看 DSH 日志里有没有
+> client bundle 404。
+
+#### 开发模式：从本地仓库软链
+
+想在改代码后立即看到效果时，把仓库软链到 desktop profile，并在
+`dependencies` 里用绝对路径的 `file:` 依赖：
+
+```bash
+ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
+```
+
+```json
+{
+  "dependencies": {
+    "dsh-diagram-leapavid": "file:/absolute/path/to/dsh-diagram-leapavid"
+  }
+}
+```
+
+同样确认 `dsh.profile.bundles` 里包含包名，然后重启 DSH。
 
 ## 使用
 
