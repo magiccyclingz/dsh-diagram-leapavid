@@ -48,9 +48,9 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 - **响应式**：列表用 `auto-fill / minmax(248px, 1fr)` 铺满面板；详情页用容器查询
   跟随面板宽度切换两栏 / 单栏，而不是跟随窗口。
 
-![LeapAvid图表工坊详情页](docs/screenshot-detail.png)
+![LeapAvid图表工坊详情页：左侧图型说明，右侧生成表单、规范档位与配色](docs/screenshot-detail.png)
 
-![10 套品牌配色与色盘说明](docs/screenshot-palettes.png)
+*详情页：左边读布局规则与官方示例，右边填内容、选规范档位与品牌配色。*
 
 ## 环境要求
 
@@ -195,7 +195,7 @@ skill/SKILL.md + references + templates ─┐
 │   ├── sync-skill.mjs        # 从上游 checkout 同步 skill/
 │   ├── test-palettes.mjs     # 配色数量、token 格式与对比度校验
 │   └── test-prompt.mjs       # 50 图型 + 5 变体 + 10 配色 + 精简/完整注入测试
-├── docs/                     # README 截图（仅插件面板，不含 DSH 左栏）
+├── docs/                     # README 截图（列表页 + 详情页，仅插件面板）
 ├── LICENSE                   # MIT 许可全文
 └── THIRD-PARTY-NOTICES.md    # 第三方版权与 MIT 许可全文
 ```
