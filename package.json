@@ -1,6 +1,6 @@
 {
   "name": "dsh-diagram-leapavid",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Diagram LeapAvid — browse 50 editorial diagram templates and prepare a prompt that opens a new DSH conversation to generate a single-file HTML diagram.",
   "author": "LeapAvid",
