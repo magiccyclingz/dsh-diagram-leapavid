@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
-const refsDir = process.argv[2] || join(process.env.HOME, '.dsh/profiles/desktop/node_modules/dsh-ai-diagrams/skills/diagram-design/references');
+const refsDir = process.argv[2] || join(root, 'skill/references');
 const finalPath = join(root, 'src/types.final.json');
 const prev = existsSync(finalPath) ? JSON.parse(readFileSync(finalPath, 'utf8')) : [];
 const prevBySlug = new Map(prev.map((t) => [t.slug, t]));

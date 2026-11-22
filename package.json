@@ -1,8 +1,8 @@
 {
   "name": "dsh-diagram-leapavid",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Diagram LeapAvid — browse 50 editorial diagram templates and prepare a prompt that opens a new DSH conversation to generate a single-file HTML diagram.",
+  "description": "Diagram LeapAvid — browse 50 editorial diagram types and generate single-file HTML diagrams with the bundled diagram-design skill; no external skill or plugin required.",
   "author": "LeapAvid",
   "license": "MIT",
   "repository": {
@@ -32,7 +32,8 @@
     "THIRD-PARTY-NOTICES.md",
     "docs",
     "locale",
-    "screenshots.json"
+    "screenshots.json",
+    "skill"
   ],
   "dsh": {
     "bundle": {
@@ -43,5 +44,9 @@
       "immediately": true,
       "inject": []
     }
+  },
+  "scripts": {
+    "test": "node scripts/test-prompt.mjs",
+    "sync-skill": "node scripts/sync-skill.mjs"
   }
 }

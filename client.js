@@ -117,26 +117,37 @@ window.__ModuleLoader__.load({
     /* PREVIEWS:END */
     var CSS = ".ds-page{container-type:inline-size;display:flex;flex-direction:column;height:100%;box-sizing:border-box;padding:0;color:var(--dsw-alias-label-primary)}.ds-scroll{flex:1;min-height:0;overflow-y:auto;padding:26px clamp(20px,3vw,56px) 56px}.ds-inner{width:100%}.ds-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:20px}.ds-title{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:0}.ds-sub{color:var(--dsw-alias-label-secondary);font-size:13px;margin:6px 0 0;line-height:1.55}.ds-search{border:1px solid var(--dsw-alias-border-l2);border-radius:10px;padding:8px 12px;background:transparent;color:inherit;font:inherit;font-size:13px;width:216px;outline:none}.ds-search:focus{border-color:var(--dsw-alias-state-business-primary)}.ds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px}.ds-card{text-align:left;border:1px solid var(--dsw-alias-border-l2);border-radius:14px;padding:0;overflow:hidden;background:transparent;cursor:pointer;display:flex;flex-direction:column;font:inherit;color:inherit;transition:background .16s var(--ds-ease-in-out,ease),border-color .16s var(--ds-ease-in-out,ease)}.ds-thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#f5f5f5;border-bottom:1px solid var(--dsw-alias-border-l2)}.ds-body{display:flex;flex-direction:column;gap:4px;padding:11px 14px 13px;flex:1}.ds-card:hover{background:var(--dsw-alias-interactive-bg-hover);border-color:var(--dsw-alias-border-l3)}.ds-idx{font-size:10.5px;font-family:var(--dsw-font-mono,ui-monospace,monospace);color:var(--dsw-alias-label-tertiary);letter-spacing:.1em}.ds-name{font-size:14px;font-weight:600;line-height:1.3}.ds-en{font-size:10.5px;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono,ui-monospace,monospace);letter-spacing:.02em}.ds-for{font-size:11.5px;line-height:1.5;color:var(--dsw-alias-label-secondary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.ds-back{border:none;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;font-size:12.5px;cursor:pointer;padding:0;margin:0 0 14px}.ds-back:hover{color:var(--dsw-alias-label-primary)}.ds-hero{border-bottom:1px solid var(--dsw-alias-border-l2);padding-bottom:16px;margin-bottom:20px}.ds-h1{font-size:23px;font-weight:600;margin:0;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.ds-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.ds-chip{font-size:11px;padding:2px 9px;border-radius:999px;border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary)}.ds-detail{display:grid;grid-template-columns:minmax(0,1fr) clamp(320px,26%,400px);grid-template-areas:\"main side\";gap:clamp(22px,2.4vw,40px);align-items:start}.ds-preview{margin:0 0 clamp(18px,2vw,26px)}.ds-preview figure{margin:0;display:flex;flex-direction:column;gap:9px}.ds-preview img{display:block;width:100%;height:auto;box-sizing:border-box;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--dsw-alias-border-l2);border-radius:12px;background:#f5f5f5;cursor:zoom-in;transition:border-color .16s var(--ds-ease-in-out,ease)}.ds-preview img:hover{border-color:var(--dsw-alias-border-l3)}.ds-preview figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:10px;line-height:1.4;color:var(--dsw-alias-label-tertiary);font-family:var(--dsw-font-mono,ui-monospace,monospace)}.ds-figlab{letter-spacing:.12em;text-transform:uppercase}.ds-main{grid-area:main;max-width:920px}.ds-zoom{position:fixed;inset:0;z-index:9999;background:rgba(18,18,22,.74);display:flex;align-items:center;justify-content:center;padding:4vh 4vw;cursor:zoom-out}.ds-zoom img{max-width:100%;max-height:92vh;width:auto;height:auto;border-radius:12px;background:#f5f5f5;box-shadow:0 30px 80px rgba(0,0,0,.4)}@container (max-width:1120px){.ds-detail{grid-template-columns:minmax(0,1fr) clamp(290px,30%,360px);gap:clamp(20px,2vw,28px)}}@container (max-width:800px){.ds-detail{grid-template-columns:1fr;grid-template-areas:\"main\" \"side\";gap:26px}.ds-main{max-width:none}}.ds-sec{margin-bottom:20px}.ds-sec h3{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dsw-alias-label-tertiary);margin:0 0 8px;font-weight:600}.ds-sec ul{margin:0;padding-left:15px;color:var(--dsw-alias-label-secondary);font-size:12.5px;line-height:1.62}.ds-sec li{margin-bottom:5px}.ds-form{grid-area:side;border:1px solid var(--dsw-alias-border-l2);border-radius:16px;padding:16px 16px 15px;display:flex;flex-direction:column;gap:13px;background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.035))}.ds-field{display:flex;flex-direction:column;gap:5px}.ds-lab{font-size:12px;color:var(--dsw-alias-label-secondary)}.ds-in,.ds-ta,.ds-sel{border:1px solid var(--dsw-alias-border-l2);border-radius:9px;padding:8px 11px;font:inherit;font-size:13px;color:inherit;background:transparent;outline:none;width:100%;box-sizing:border-box}.ds-ta{min-height:126px;resize:vertical;line-height:1.62}.ds-in:focus,.ds-ta:focus,.ds-sel:focus{border-color:var(--dsw-alias-state-business-primary)}.ds-sel option{background:var(--dsw-alias-bg-base,#fff);color:inherit}.ds-opts{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--dsw-alias-label-secondary)}.ds-opts label{display:flex;gap:6px;align-items:center;cursor:pointer}.ds-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:1px}.ds-btn{border:none;border-radius:9px;padding:8px 15px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;background:var(--dsw-alias-state-business-primary);color:#fff}.ds-btn:disabled{opacity:.5;cursor:default}.ds-btn2{background:transparent;color:var(--dsw-alias-label-secondary);border:1px solid var(--dsw-alias-border-l2);font-weight:500}.ds-note{font-size:11.5px;color:var(--dsw-alias-label-tertiary);line-height:1.55}.ds-empty{color:var(--dsw-alias-label-tertiary);font-size:13px;padding:48px 0}.ds-hint{font-size:11px;color:var(--dsw-alias-label-tertiary);line-height:1.5}";
 
-    function promptFor(type, form) {
-      var extras = [];
-      if (form.sketchy) extras.push('sketchy 手绘笔触');
-      if (form.terminal) extras.push('terminal 终端风格');
-      if (form.motion) extras.push('motion 进场动效');
-      var lines = [
-        '用 diagram-design 技能画一张「' + type.zh + '」图。',
-        '',
-        '一、图型：' + type.slug + '（references/type-' + type.slug + '.md）',
-        '二、主题：' + (form.name || type.zh),
-        '三、内容：',
-        form.content,
-        '',
-        '四、风格：' + form.variant + (extras.length ? ' + ' + extras.join(' + ') : ''),
-        '五、要求：',
-        '  1. 中文文案，遵守技能的强制连线规则与预算（≤9 节点、≤12 连线、≤2 个强调元素、≤2 条注释）。',
-        '  2. 单文件 HTML + 内联 SVG，自包含、无远程资源。',
-        '  3. 完成后用 diagram_save 保存到工作区 diagrams/，并把 HTML 与 PNG 都给我。'
-      ];
-      return lines.join('\n');
+    var PROMPT_ROUTE = '/api/diagram-leapavid/prompt';
+
+    async function promptFor(type, form) {
+      var res;
+      try {
+        res = await fetch(PROMPT_ROUTE, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            slug: type.slug,
+            typeName: type.zh,
+            typeTitle: type.title,
+            name: form.name,
+            content: form.content,
+            variant: form.variant,
+            sketchy: !!form.sketchy,
+            terminal: !!form.terminal,
+            motion: !!form.motion
+          })
+        });
+      } catch (err) {
+        throw new Error('内置规范服务未响应，请确认 DSH 已加载本插件并重启后再试。');
+      }
+      var data = null;
+      try { data = await res.json(); } catch (err) { data = null; }
+      if (!res.ok) {
+        if (res.status === 404) throw new Error('内置规范服务未找到（HTTP 404），请确认插件已加载并重启 DSH。');
+        throw new Error((data && data.error) || ('提示词生成失败（HTTP ' + res.status + '）'));
+      }
+      if (!data || !data.prompt) throw new Error('提示词生成失败：宿主没有返回 prompt。');
+      return data.prompt;
     }
 
     function Submit(ctx) {
@@ -214,19 +225,28 @@ window.__ModuleLoader__.load({
 
       var submit = async function () {
         if (!form.content.trim()) { setNote('先在「内容 / 数据」里写下要画的节点、流程或数字。'); return; }
-        setBusy('sending'); setNote('正在创建新会话并发送…');
+        setBusy('sending'); setNote('正在准备内置规范提示词…');
         try {
-          await onSubmit(promptFor(type, form));
+          var text = await promptFor(type, form);
+          setNote('正在创建新会话并发送…');
+          await onSubmit(text);
           setBusy('done'); setNote('已在新会话中开始生成，回到左侧会话列表就能看到进度。');
         } catch (err) {
           setBusy('idle'); setNote('发送失败：' + (err && err.message ? err.message : err) + '（可以先复制提示词手动粘贴）');
         }
       };
-      var copy = function () {
-        var text = promptFor(type, form);
+      var copy = async function () {
+        if (!form.content.trim()) { setNote('先在「内容 / 数据」里写下要画的节点、流程或数字。'); return; }
+        setBusy('copying'); setNote('正在准备内置规范提示词…');
         try {
-          navigator.clipboard.writeText(text).then(function () { setNote('提示词已复制。'); }, function () { setNote('复制失败，请手动选择文本。'); });
-        } catch (e) { setNote('复制失败，请手动选择文本。'); }
+          var text = await promptFor(type, form);
+          await navigator.clipboard.writeText(text);
+          setNote('提示词已复制（' + Math.round(text.length / 1024) + ' KB，含内置规范）。');
+        } catch (err) {
+          setNote('复制失败：' + (err && err.message ? err.message : err) + '，请手动选择文本。');
+        } finally {
+          setBusy('idle');
+        }
       };
 
       return h(React.Fragment, null,
@@ -235,7 +255,7 @@ window.__ModuleLoader__.load({
         h('div', { className: 'ds-hero' },
           h('h1', { className: 'ds-h1' }, type.zh, h('span', { className: 'ds-en', style: { fontSize: '12px' } }, type.title)),
           h('div', { className: 'ds-chips' },
-            h('span', { className: 'ds-chip' }, 'references/type-' + type.slug + '.md'),
+            h('span', { className: 'ds-chip' }, '内置规范 · type-' + type.slug),
             type.example ? h('span', { className: 'ds-chip' }, type.example) : null
           ),
           h('p', { className: 'ds-sub' }, type.bestFor)
@@ -264,7 +284,7 @@ window.__ModuleLoader__.load({
             }),
             h('div', { className: 'ds-sec' },
               h('h3', null, '生成说明'),
-              h('p', { className: 'ds-hint' }, '提交后会新建一个会话，并把带图型、风格与内容的提示词发进去；模型用 diagram-design 技能产出单文件 HTML + 内联 SVG，再经 diagram_save 存档。')
+              h('p', { className: 'ds-hint' }, '提交后会新建一个会话，把内置的 diagram-design 规范（含本次图型、风格与内容）一起发进去；模型直接产出单文件 HTML + 内联 SVG，保存到工作区 diagrams/，不再依赖外部技能或 diagram_save。')
             )
           ),
           h('div', { className: 'ds-form' },
@@ -294,8 +314,8 @@ window.__ModuleLoader__.load({
               h('label', null, h('input', { type: 'checkbox', checked: form.motion, onChange: function (e) { patch('motion', e.target.checked); } }), '动效 motion')
             ),
             h('div', { className: 'ds-actions' },
-              h('button', { className: 'ds-btn', disabled: busy === 'sending', onClick: submit }, busy === 'sending' ? '发送中…' : '生成图表'),
-              h('button', { className: 'ds-btn ds-btn2', onClick: copy }, '复制提示词')
+              h('button', { className: 'ds-btn', disabled: busy === 'sending' || busy === 'copying', onClick: submit }, busy === 'sending' ? '发送中…' : '生成图表'),
+              h('button', { className: 'ds-btn ds-btn2', disabled: busy === 'copying' || busy === 'sending', onClick: copy }, busy === 'copying' ? '准备中…' : '复制提示词')
             ),
             note ? h('div', { className: 'ds-note' }, note) : null
           )
