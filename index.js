@@ -16,6 +16,8 @@ const REFS = path.join(SKILL_ROOT, 'references')
 const ROUTE = '/api/diagram-leapavid'
 const SLUG_RE = /^[a-z0-9][a-z0-9-]*$/
 const VARIANTS = new Set(['full editorial', 'minimal light', 'minimal dark'])
+const PALETTES_FILE = path.join(HERE, 'palettes.json')
+let paletteCache = null
 
 export const name = 'dsh-diagram-leapavid'
 export const inject = ['webServer']
@@ -77,6 +79,70 @@ async function readType(slug) {
   }
 }
 
+async function readPalettes() {
+  if (!paletteCache) {
+    paletteCache = readFile(PALETTES_FILE, 'utf8')
+      .then((text) => JSON.parse(text))
+      .catch((err) => {
+        paletteCache = null
+        if (err && err.code === 'ENOENT') throw new HttpError(500, '内置配色缺少 palettes.json')
+        if (err instanceof SyntaxError) throw new HttpError(500, '内置配色 palettes.json 不是合法 JSON')
+        throw err
+      })
+  }
+  return paletteCache
+}
+
+async function findPalette(id) {
+  const key = String(id == null ? '' : id).trim()
+  if (!key) return null
+  const data = await readPalettes()
+  const palette = Array.isArray(data.palettes) ? data.palettes.find((p) => p && p.id === key) : null
+  if (!palette) throw new HttpError(400, '没有这个配色：' + key)
+  return palette
+}
+
+function paletteSection(p) {
+  const t = p.tokens
+  const source = p.source || ('design-md/' + p.id + '/DESIGN.md')
+  const brand = t.accentBrand && String(t.accentBrand).toLowerCase() !== String(t.accent).toLowerCase()
+    ? '\n- 品牌原色：' + t.accentBrand + '（仅用于理解来源；不要直接拿它当文字色或大面积填充）'
+    : ''
+  const rows = [
+    ['paper', t.paper, '页面底色，也是注释遮罩色'],
+    ['paper-2', t.paper2, '次级纸面 / 分区底'],
+    ['ink', t.ink, '正文与节点名'],
+    ['ink-strong', t.ink, '最强文字 / 标题'],
+    ['muted', t.muted, '次级说明'],
+    ['soft', t.soft, '弱化标签 / 坐标轴文字'],
+    ['rule', t.rule, '发丝线 / 网格线'],
+    ['rule-solid', t.ruleSolid, '实线边框 / 分隔线'],
+    ['accent', t.accent, '唯一强调色；最多 1–2 个元素'],
+    ['accent-tint', t.accentTint, '焦点节点的浅底'],
+    ['link', t.link, '链接与外部调用'],
+    ['accent fill text', t.onAccent, '放在 accent 实底上的文字（非 style-guide token）'],
+  ]
+  return [
+    '本段优先于 B 段 style-guide.md 的 token 表。用户从 LeapAvid Design MD 中选择了「' + p.name + '」；只替换颜色，不替换版式、字号、线宽、圆角、间距与复杂度预算。',
+    '',
+    '- 配色：' + p.name + '（' + p.id + '，' + (p.mode === 'dark' ? '深色' : '浅色') + '）',
+    '- 来源：' + source,
+    '- 说明：' + p.description,
+    '- 使用建议：' + p.guidance + brand,
+    '',
+    '| role | value | 用途 |',
+    '| --- | --- | --- |',
+    ...rows.map((row) => '| ' + row[0] + ' | ' + row[1] + ' | ' + row[2] + ' |'),
+    '',
+    '绘制规则：',
+    '1. 以上值同时覆盖 style-guide 的 light 与 dark 两列；无论 variant 选 Full editorial / Minimal light / Minimal dark，都使用这一套纸/墨/强调色。variant 只决定版式、密度和字体层级。',
+    '2. 不要使用任何未列出的品牌彩色；accent 只用于 1–2 个焦点元素，accent-tint 只作焦点节点的浅底。',
+    '3. 所有正文/标签与 paper 或 paper-2 的对比度必须 ≥4.5:1；非文字标记 ≥3:1。若把文字放在 accent 实底上，只能用 accent fill text 色。',
+    '4. 不使用渐变、投影、发光；层级用发丝线、纸面深浅和字重表达。',
+    '5. 多系列图表（bar / line / heatmap 等）仍按 type 文件的 series 规则取色；若与品牌色冲突，优先保证可读性，accent 只保留给焦点系列。',
+  ].join('\n')
+}
+
 function cleanText(value, limit) {
   const text = String(value == null ? '' : value).replace(/\r\n/g, '\n').trim()
   if (text.length <= limit) return text
@@ -112,6 +178,7 @@ export async function composePrompt(input = {}) {
   const sketchy = Boolean(input.sketchy)
   const terminal = Boolean(input.terminal)
   const motion = Boolean(input.motion)
+  const palette = terminal ? null : await findPalette(input.palette)
   const typeName = cleanText(input.typeName, 80) || slug
   const typeTitle = cleanText(input.typeTitle, 120) || slug
   const name = cleanText(input.name, 160) || (typeName + ' · 未命名图表')
@@ -137,12 +204,13 @@ export async function composePrompt(input = {}) {
   if (sketchy) parts.push(section('J · 手绘变体（primitive-sketchy.md）', await readSkill('references/primitive-sketchy.md')))
   if (terminal) parts.push(section('K · 终端变体（primitive-terminal.md）', await readSkill('references/primitive-terminal.md')))
   if (motion) parts.push(section('L · 动效（animation.md）', await readSkill('references/animation.md')))
+  if (palette) parts.push(section('M · 本次品牌配色（覆盖 style-guide token）', paletteSection(palette)))
 
   const extras = []
   if (sketchy) extras.push('手绘 sketchy 笔触')
   if (terminal) extras.push('终端 terminal 外框')
   if (motion) extras.push('进场动效 motion（无 JS 时也必须是一张完整的静态图）')
-  const styleLine = variant + (extras.length ? ' + ' + extras.join(' + ') : '')
+  const styleLine = variant + (extras.length ? ' + ' + extras.join(' + ') : '') + (palette ? ' + 配色 ' + palette.name : '')
 
   const header = [
     '# LeapAvid 图表工坊 · 直接生成任务',
@@ -181,6 +249,7 @@ export async function composePrompt(input = {}) {
     filename,
     template: templateName,
     style: styleLine,
+    palette: palette ? { id: palette.id, name: palette.name, mode: palette.mode, source: palette.source } : null,
     chars: prompt.length,
     sections: parts.length,
   }
@@ -211,7 +280,13 @@ export function apply(ctx) {
             skill: 'diagram-design',
             bundled: true,
             types: await countTypes(),
+            palettes: (await readPalettes()).palettes.length,
           })
+          return
+        }
+        if (req.method === 'GET' && (tail === '/palettes' || tail === '/palettes/')) {
+          const data = await readPalettes()
+          sendJson(res, 200, { version: data.version, source: data.source, palettes: data.palettes })
           return
         }
         if (req.method === 'POST' && (tail === '/prompt' || tail === '/prompt/')) {

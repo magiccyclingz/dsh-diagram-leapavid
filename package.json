@@ -1,8 +1,8 @@
 {
   "name": "dsh-diagram-leapavid",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
-  "description": "Diagram LeapAvid — browse 50 editorial diagram types and generate single-file HTML diagrams with the bundled diagram-design skill; no external skill or plugin required.",
+  "description": "Diagram LeapAvid — browse 50 editorial diagram types, pick from 10 brand palettes, and generate single-file HTML diagrams with the bundled diagram-design skill; no external skill or plugin required.",
   "author": "LeapAvid",
   "license": "MIT",
   "repository": {
@@ -33,6 +33,8 @@
     "docs",
     "locale",
     "screenshots.json",
+    "palettes.json",
+    "scripts",
     "skill"
   ],
   "dsh": {
@@ -46,7 +48,7 @@
     }
   },
   "scripts": {
-    "test": "node scripts/test-prompt.mjs",
+    "test": "node scripts/test-palettes.mjs && node scripts/test-prompt.mjs",
     "sync-skill": "node scripts/sync-skill.mjs"
   }
 }

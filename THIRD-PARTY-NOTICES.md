@@ -68,6 +68,59 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+## LeapAvid Design MD (palette data)
+
+- **Project:** LeapAvid Design MD
+- **Source:** local project `LeapAvid-Design-md/design-md`
+- **License:** MIT
+- **Copyright:** Copyright (c) 2026 VoltAgent
+
+### Material included in this repository
+
+- `palettes.json`: ten curated palettes derived from the color tokens in
+  `design-md/<brand>/DESIGN.md` (Airbnb, Apple, Linear, Vercel, Stripe, Notion,
+  Claude, Binance, Starbucks, Mastercard).
+
+### Modifications
+
+- Selected ten of the 84 brand design languages and mapped their colors onto the
+  diagram-design semantic roles (`paper`, `paper2`, `ink`, `muted`, `soft`,
+  `rule`, `ruleSolid`, `accent`, `accentBrand`, `accentTint`, `link`,
+  `onAccent`).
+- Adjusted some accent and muted values to meet the plugin's readability contract
+  (WCAG 4.5:1 for text, 3:1 for non-text). The original brand accent is kept in
+  `accentBrand` and in the visible swatches; for example Airbnb uses `#d42a4b`
+  for readable accent text while the swatch shows the original Rausch `#ff385c`.
+- Added Chinese display names, descriptions, and usage guidance. Brand names and
+  colors remain the property of their respective owners; this project is not
+  affiliated with or endorsed by those brands.
+
+### License
+
+```text
+MIT License
+
+Copyright (c) 2026 VoltAgent
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ## No runtime dependency on dsh-ai-diagrams
 
 Earlier versions of this plugin required the separate `dsh-ai-diagrams` package

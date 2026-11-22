@@ -1,6 +1,6 @@
 # LeapAvid图表工坊
 
-> DSH 侧栏里的 50 种编辑级图表工作台。选一种图型、填一张表，直接在新会话里生成一张可发布的单文件 HTML 图表。
+> DSH 侧栏里的 50 种编辑级图表工作台。选一种图型、挑一套品牌配色、填一张表，直接在新会话里生成一张可发布的单文件 HTML 图表。
 
 ![LeapAvid图表工坊列表页](docs/screenshot-list.png)
 
@@ -12,12 +12,13 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 提示词变成选图型、填内容、点生成。
 
 它不依赖 `dsh-ai-diagrams`，也不需要预先安装 `diagram-design` 技能或任何
-`diagram_save` 工具。插件的宿主侧会按你选的图型、风格和内容，从内置的
+`diagram_save` 工具。插件的宿主侧会按你选的图型、风格、配色和内容，从内置的
 `skill/` 目录拼出一份自包含的生成提示词，再交给当前会话的模型直接产出图表。
 
 生成结果是由模型产出的**单文件 HTML + 内联 SVG**，文字可选中、结构可编辑，
-可以直接在浏览器里打开，也可以自行导出 SVG / PNG。视觉上沿用
-`diagram-design` 的编辑风：灰纸底、发丝线、单一强调色、克制的字体层级。
+可以直接在浏览器里打开，也可以自行导出 SVG / PNG。默认视觉上沿用
+`diagram-design` 的编辑风：灰纸底、发丝线、单一强调色、克制的字体层级；
+选品牌配色后，纸、墨、强调色会整体替换，但版式与字体层级仍由所选风格决定。
 
 ## 功能
 
@@ -29,10 +30,14 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 - **列表页**：每张卡片带一张官方示例预览图，下面是中文名、英文名与技能原文的
   “适合用来画什么”；支持按中文名、英文名或用途即时搜索。
 - **详情页**：正文列顶部是该图型的官方示例大图（点击全屏放大），下面依次是
-  「简介」与技能里的布局规则、反模式与构图预算；右栏是生成表单。
+  「简介」与技能里的布局规则、反模式与构图预算；右栏是生成表单与配色选择。
 - **三种风格**：Full editorial（完整编辑风，默认）、Minimal light（浅色极简）、
   Minimal dark（深色极简）；可叠加手绘 `sketchy`、终端 `terminal` 或动效
   `motion`。
+- **10 套品牌配色**：从 LeapAvid Design MD 的 84 套品牌设计语言中精选
+  Airbnb、Apple、Linear、Vercel、Stripe、Notion、Claude、Binance、
+  Starbucks、Mastercard。表单里直接看色盘和中文说明，选中后整套纸/墨/强调色
+  覆盖 `style-guide` 的默认色；不选则保持原来的烟白纸 + 焦橙。
 - **一键生成**：提交后先向宿主请求内置规范提示词，再新建会话、打开它，并把
   图型、风格与内容写进提示词；模型直接产出单文件 HTML，保存到工作区
   `diagrams/`。
@@ -42,6 +47,8 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
   跟随面板宽度切换两栏 / 单栏，而不是跟随窗口。
 
 ![LeapAvid图表工坊详情页](docs/screenshot-detail.png)
+
+![10 套品牌配色与色盘说明](docs/screenshot-palettes.png)
 
 ## 环境要求
 
@@ -60,9 +67,9 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 ### 从 npm 安装
 
 本插件已发布到 npm：[dsh-diagram-leapavid](https://www.npmjs.com/package/dsh-diagram-leapavid)。
-当前仓库版本为 **0.2.0**。
+当前仓库版本为 **0.3.0**。
 
-> **注意：0.2.0 尚未发布到 npm。** npm 上目前的 `0.1.1` 是内置规范之前的旧版，不包含本页描述的 `skill/` 规范与 `/api/diagram-leapavid/prompt` 路由。要用内置生成，请按下面的「从本地仓库安装 / 开发」；等 0.2.0 发布后再用这条命令。
+> **注意：0.3.0 尚未发布到 npm。** npm 上目前的 `0.1.1` 是内置规范与配色之前的旧版，不包含本页描述的 `skill/` 规范、10 套配色与 `/api/diagram-leapavid/prompt` 路由。要用内置生成，请按下面的「从本地仓库安装 / 开发」；等 0.3.0 发布后再用这条命令。
 
 ```bash
 dsh plugin --profile desktop add dsh-diagram-leapavid
@@ -117,7 +124,10 @@ ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
    - **图名**：会作为图表的标题。
    - **内容 / 数据**：每行一个节点、一条连线或一组数字；也可以直接写一段业务描述。
    - **风格**：Full editorial / Minimal light / Minimal dark。
-   - **可选叠加**：手绘 sketchy、终端 terminal、动效 motion。
+   - **配色**：10 套品牌配色任选，卡片上有 6 段色盘和中文说明；不选则用内置
+     烟白纸 + 焦橙。选 **内置默认** 可随时恢复。
+   - **可选叠加**：手绘 sketchy、终端 terminal、动效 motion。终端皮肤固定黑底
+     橙字，勾选后会忽略品牌配色。
 4. 点 **生成图表**。插件会请求内置规范提示词，新建会话并发送。
 5. 模型按规范产出单文件 HTML + 内联 SVG，保存到工作区 `diagrams/` 下，例如
    `diagrams/architecture-20261122-214535.html`。
@@ -127,21 +137,23 @@ ln -s "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-diagram-leapavid
 ## 工作方式
 
 ```text
-skill/SKILL.md + references + templates ──composePrompt──▶ POST /api/diagram-leapavid/prompt
-                                                              │
-                                                     client.js promptFor()
-                                                              │
-                                          新建会话 + 发送自包含提示词 ──▶ 模型产出
-                                                              │
-                                              diagrams/<slug>-<timestamp>.html
+skill/SKILL.md + references + templates ─┐
+                                        ├─ composePrompt ──▶ POST /api/diagram-leapavid/prompt
+              palettes.json ────────────┘                              │
+                                                                 client.js promptFor()
+                                                                      │
+                                                      新建会话 + 发送自包含提示词 ──▶ 模型产出
+                                                                      │
+                                                          diagrams/<slug>-<timestamp>.html
 ```
 
-- `index.js` 是宿主侧：注册 `/api/diagram-leapavid/health` 与
-  `/api/diagram-leapavid/prompt`，校验图型、风格和内容，按需拼出
-  SKILL.md、style-guide、primitives、type-*.md 与起始模板。
+- `index.js` 是宿主侧：注册 `/api/diagram-leapavid/health`、
+  `/api/diagram-leapavid/palettes` 与 `/api/diagram-leapavid/prompt`，校验图型、
+  风格、配色和内容，按需拼出 SKILL.md、style-guide、primitives、type-*.md、
+  起始模板，以及一段覆盖 `style-guide` token 的品牌配色约束。
 - `client.js` 是 DSH 的客户端 bundle：注册侧栏入口与面板，包含 React UI、样式，
   以及内联的图型文案 `DATA`、列表预览图 `PREVIEWS`、详情大图
-  `PREVIEWS_DETAIL`。
+  `PREVIEWS_DETAIL`。配色由 `/palettes` 接口读取，不内联。
 - 图型文案和预览图全部内联，打开面板不需要联网，也不依赖本地图片文件。
 - 提示词头部有明确的执行契约：不要安装或调用任何技能、不要读 references 路径、
   跳过上游 SKILL 的首次提问门禁、不要使用 `diagram_save`，直接用 `write`
@@ -152,7 +164,8 @@ skill/SKILL.md + references + templates ──composePrompt──▶ POST /api/d
 ```text
 .
 ├── client.js                 # DSH 客户端 bundle：UI + DATA + PREVIEWS（生成物）
-├── index.js                  # 宿主入口：内置规范路由
+├── index.js                  # 宿主入口：内置规范与配色路由
+├── palettes.json             # 10 套品牌配色与 role token
 ├── cordis.patch.yml          # 插件声明
 ├── icon.svg                  # 侧栏图标
 ├── locale/                   # en.json / zh-CN.json 显示名与描述
@@ -172,7 +185,8 @@ skill/SKILL.md + references + templates ──composePrompt──▶ POST /api/d
 │   ├── embed-previews.mjs    # 内联预览图到 client.js
 │   ├── embed-data.mjs        # 内联图型文案到 client.js
 │   ├── sync-skill.mjs        # 从上游 checkout 同步 skill/
-│   └── test-prompt.mjs       # 50 图型 + 5 变体的提示词测试
+│   ├── test-palettes.mjs     # 配色数量、token 格式与对比度校验
+│   └── test-prompt.mjs       # 50 图型 + 5 变体 + 10 配色的提示词测试
 ├── docs/                     # README 截图（仅插件面板，不含 DSH 左栏）
 ├── LICENSE                   # MIT 许可全文
 └── THIRD-PARTY-NOTICES.md    # 第三方版权与 MIT 许可全文
@@ -210,7 +224,14 @@ node scripts/embed-data.mjs
 **提示词为什么这么大？**
 为了保证图表严格符合 `diagram-design` 的布局与连线规则，提示词会把本次图型
 需要的 SKILL.md、设计系统、图元、布局预算、输出规范和起始模板一起注入，通常
-在 115–180 KB。内容越复杂，模型越需要这些约束。
+在 115–180 KB。内容越复杂，模型越需要这些约束。选了品牌配色时，还会多一段
+覆盖 token 的配色约定，但仍在同一量级。
+
+**配色会改掉风格吗？**
+不会。配色只覆盖 `style-guide` 里的纸、墨、发丝线、强调色与链接色；
+Full editorial / Minimal light / Minimal dark 仍决定版式、密度与字体。
+品牌原色如果对比度不足，会换成一个加深的可读值，并在卡片说明里保留品牌语气。
+勾选 **终端 terminal** 后使用固定黑底橙字，品牌配色不参与。
 
 **预览图不显示？**
 `client.js` 里的 `PREVIEWS` 是生成物；重跑 `scripts/build-previews.sh` 或至少
@@ -251,6 +272,20 @@ Copyright © 2026 **LeapAvid**.
 规范正文未做改写；只选取生成所需的 SKILL.md、references、5 个模板与 LICENSE
 一起打包。MIT 许可要求保留版权与许可声明；完整文本、修改说明与再分发要求见
 [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md)。
+
+### 配色数据
+
+`palettes.json` 中的 10 套配色派生自 **LeapAvid Design MD** 的
+`design-md/<brand>/DESIGN.md` 颜色 token：
+
+- **版权**：Copyright (c) 2026 VoltAgent
+- **许可**：MIT License
+- **范围**：仅选取 10 套品牌色，映射为 diagram-design 的 role token；品牌名称与
+  色值归各品牌权利人所有，本项目与这些品牌没有隶属或背书关系。
+
+为保证图表可读性，部分强调色/辅助灰在原品牌色基础上加深（例如 Airbnb 的
+Rausch 珊瑚在正文强调场景改用 `#d42a4b`，展示色盘仍保留 `#ff385c`）。
+完整归属与许可文本见 [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md)。
 
 ### 名称与免责声明
 

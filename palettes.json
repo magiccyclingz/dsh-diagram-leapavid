@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "source": {
+    "name": "LeapAvid Design MD",
+    "path": "design-md",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2026 VoltAgent"
+  },
+  "palettes": [
+    {
+      "id": "airbnb",
+      "name": "Airbnb · 暖珊瑚",
+      "en": "Rausch Coral",
+      "source": "design-md/airbnb/DESIGN.md",
+      "mode": "light",
+      "description": "白纸、炭黑字与 Rausch 珊瑚；暖灰把层级拉开。适合消费、旅行和服务叙事。",
+      "guidance": "珊瑚只落在焦点节点和主路径；其余用暖灰与发丝线分层。",
+      "tokens": {
+        "paper": "#ffffff",
+        "paper2": "#f7f7f7",
+        "ink": "#222222",
+        "muted": "#5f5f5f",
+        "soft": "#6e6e6e",
+        "rule": "rgba(34,34,34,0.12)",
+        "ruleSolid": "#d9d9d9",
+        "accent": "#d42a4b",
+        "accentBrand": "#ff385c",
+        "accentTint": "rgba(255,56,92,0.10)",
+        "link": "#0b6bcb",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#ffffff",
+        "#f7f7f7",
+        "#222222",
+        "#6e6e6e",
+        "#ff385c",
+        "#0b6bcb"
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "Apple · 石墨蓝",
+      "en": "Action Blue",
+      "source": "design-md/apple/DESIGN.md",
+      "mode": "light",
+      "description": "博物馆式留白，石墨黑配 Action Blue；克制的蓝只给交互。适合产品、硬件和发布说明。",
+      "guidance": "蓝色只出现在可点击或可跟随的路径；不要用它填满节点。",
+      "tokens": {
+        "paper": "#ffffff",
+        "paper2": "#f5f5f7",
+        "ink": "#1d1d1f",
+        "muted": "#5f5f63",
+        "soft": "#6f6f72",
+        "rule": "rgba(29,29,31,0.12)",
+        "ruleSolid": "#d2d2d7",
+        "accent": "#0066cc",
+        "accentBrand": "#0071e3",
+        "accentTint": "rgba(0,113,227,0.10)",
+        "link": "#0066cc",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#ffffff",
+        "#f5f5f7",
+        "#1d1d1f",
+        "#6f6f72",
+        "#0071e3",
+        "#d2d2d7"
+      ]
+    },
+    {
+      "id": "linear",
+      "name": "Linear · 夜薰衣草",
+      "en": "Lavender Night",
+      "source": "design-md/linear/DESIGN.md",
+      "mode": "dark",
+      "description": "近黑画布与薰衣草蓝，像工程文档；冷灰字保持密度。适合系统、依赖和技术路线。",
+      "guidance": "大面积保持近黑，薰衣草只给 1–2 个焦点。",
+      "tokens": {
+        "paper": "#010102",
+        "paper2": "#0f1011",
+        "ink": "#f7f8f8",
+        "muted": "#b9bec7",
+        "soft": "#9aa0a9",
+        "rule": "rgba(247,248,248,0.12)",
+        "ruleSolid": "#34343a",
+        "accent": "#828fff",
+        "accentBrand": "#5e6ad2",
+        "accentTint": "rgba(94,106,210,0.18)",
+        "link": "#7aa2ff",
+        "onAccent": "#08090a"
+      },
+      "swatches": [
+        "#010102",
+        "#0f1011",
+        "#f7f8f8",
+        "#b9bec7",
+        "#5e6ad2",
+        "#828fff"
+      ]
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel · 黑白",
+      "en": "Monochrome",
+      "source": "design-md/vercel/DESIGN.md",
+      "mode": "light",
+      "description": "黑白骨架几乎无色，只用链接蓝标记路径。适合开发者工具、基础设施和极简技术图。",
+      "guidance": "黑色骨架承担结构，蓝色只标记链接和外部调用。",
+      "tokens": {
+        "paper": "#ffffff",
+        "paper2": "#fafafa",
+        "ink": "#171717",
+        "muted": "#666666",
+        "soft": "#737373",
+        "rule": "rgba(23,23,23,0.12)",
+        "ruleSolid": "#d9d9d9",
+        "accent": "#0060c9",
+        "accentBrand": "#0070f3",
+        "accentTint": "rgba(0,112,243,0.10)",
+        "link": "#0060c9",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#ffffff",
+        "#fafafa",
+        "#171717",
+        "#666666",
+        "#0070f3",
+        "#d9d9d9"
+      ]
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe · 电光靛",
+      "en": "Electric Indigo",
+      "source": "design-md/stripe/DESIGN.md",
+      "mode": "light",
+      "description": "深海军蓝文字配电光靛蓝，干净的金融基础设施感。适合支付、平台和 API 数据流。",
+      "guidance": "靛蓝只标记主路径；深蓝文字负责结构。",
+      "tokens": {
+        "paper": "#ffffff",
+        "paper2": "#f6f9fc",
+        "ink": "#0d253d",
+        "muted": "#56677d",
+        "soft": "#5f6d85",
+        "rule": "rgba(13,37,61,0.12)",
+        "ruleSolid": "#c7d3e0",
+        "accent": "#4f35e8",
+        "accentBrand": "#533afd",
+        "accentTint": "rgba(83,58,253,0.10)",
+        "link": "#1f66c1",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#ffffff",
+        "#f6f9fc",
+        "#0d253d",
+        "#64748d",
+        "#533afd",
+        "#1f66c1"
+      ]
+    },
+    {
+      "id": "notion",
+      "name": "Notion · 暖纸紫",
+      "en": "Warm Paper",
+      "source": "design-md/notion/DESIGN.md",
+      "mode": "light",
+      "description": "暖灰纸面与深墨字，Notion 紫只做强调。适合知识、协作、文档和信息架构。",
+      "guidance": "紫色留给焦点；纸面保持暖灰，不要用彩色便签填满。",
+      "tokens": {
+        "paper": "#ffffff",
+        "paper2": "#f6f5f4",
+        "ink": "#1a1a1a",
+        "muted": "#5d5b54",
+        "soft": "#6f6d66",
+        "rule": "rgba(26,26,26,0.12)",
+        "ruleSolid": "#d8d4cd",
+        "accent": "#5645d4",
+        "accentBrand": "#5645d4",
+        "accentTint": "rgba(86,69,212,0.10)",
+        "link": "#0068c9",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#ffffff",
+        "#f6f5f4",
+        "#1a1a1a",
+        "#6f6d66",
+        "#5645d4",
+        "#e6e0f5"
+      ]
+    },
+    {
+      "id": "claude",
+      "name": "Claude · 奶油陶土",
+      "en": "Cream Terracotta",
+      "source": "design-md/claude/DESIGN.md",
+      "mode": "light",
+      "description": "奶油纸色与陶土橙，带衬线标题的编辑气质。适合研究、内容和品牌叙事。",
+      "guidance": "陶土橙只给重点；奶油底和深墨字承担阅读。",
+      "tokens": {
+        "paper": "#faf9f5",
+        "paper2": "#f5f0e8",
+        "ink": "#141413",
+        "muted": "#5f5d57",
+        "soft": "#6c6a64",
+        "rule": "rgba(20,20,19,0.12)",
+        "ruleSolid": "#d8d1c5",
+        "accent": "#ad4e2b",
+        "accentBrand": "#cc785c",
+        "accentTint": "rgba(204,120,92,0.14)",
+        "link": "#2a6b80",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#faf9f5",
+        "#f5f0e8",
+        "#141413",
+        "#6c6a64",
+        "#cc785c",
+        "#ad4e2b"
+      ]
+    },
+    {
+      "id": "binance",
+      "name": "Binance · 曜黑黄",
+      "en": "Night Yellow",
+      "source": "design-md/binance/DESIGN.md",
+      "mode": "dark",
+      "description": "曜黑底与币安黄，强对比像交易终端。适合指标、风控、告警和高密度仪表。",
+      "guidance": "黄色只给焦点和关键数字；不要把它变成大面积填充。",
+      "tokens": {
+        "paper": "#0b0e11",
+        "paper2": "#1e2329",
+        "ink": "#eaecef",
+        "muted": "#9aa5b1",
+        "soft": "#7f8b99",
+        "rule": "rgba(234,236,239,0.12)",
+        "ruleSolid": "#2b3139",
+        "accent": "#fcd535",
+        "accentBrand": "#fcd535",
+        "accentTint": "rgba(252,213,53,0.12)",
+        "link": "#4a9eff",
+        "onAccent": "#181a20"
+      },
+      "swatches": [
+        "#0b0e11",
+        "#1e2329",
+        "#eaecef",
+        "#9aa5b1",
+        "#fcd535",
+        "#4a9eff"
+      ]
+    },
+    {
+      "id": "starbucks",
+      "name": "Starbucks · 深绿奶油",
+      "en": "Green Apron",
+      "source": "design-md/starbucks/DESIGN.md",
+      "mode": "light",
+      "description": "奶油纸面与星巴克深绿，像一份可持续报告。适合品牌、零售、供应链和 ESG。",
+      "guidance": "深绿承担结构，金色只在极少数仪式感节点出现。",
+      "tokens": {
+        "paper": "#f2f0eb",
+        "paper2": "#edebe9",
+        "ink": "#1e3932",
+        "muted": "#4f5d57",
+        "soft": "#5f6a65",
+        "rule": "rgba(30,57,50,0.12)",
+        "ruleSolid": "#c9c3ba",
+        "accent": "#006241",
+        "accentBrand": "#006241",
+        "accentTint": "rgba(0,98,65,0.10)",
+        "link": "#2f6b8a",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#f2f0eb",
+        "#edebe9",
+        "#1e3932",
+        "#5f6a65",
+        "#006241",
+        "#cba258"
+      ]
+    },
+    {
+      "id": "mastercard",
+      "name": "Mastercard · 燕麦橙",
+      "en": "Oat Signal",
+      "source": "design-md/mastercard/DESIGN.md",
+      "mode": "light",
+      "description": "燕麦色纸面、墨黑结构与信号橙，像高端年报。适合金融、战略和年度复盘。",
+      "guidance": "信号橙只给焦点；燕麦底和墨黑结构保持年报感。",
+      "tokens": {
+        "paper": "#f3f0ee",
+        "paper2": "#fcfbfa",
+        "ink": "#141413",
+        "muted": "#5f5f5f",
+        "soft": "#6d6d6d",
+        "rule": "rgba(20,20,19,0.12)",
+        "ruleSolid": "#d2ccc6",
+        "accent": "#b53a00",
+        "accentBrand": "#cf4500",
+        "accentTint": "rgba(207,69,0,0.10)",
+        "link": "#3860be",
+        "onAccent": "#ffffff"
+      },
+      "swatches": [
+        "#f3f0ee",
+        "#fcfbfa",
+        "#141413",
+        "#6d6d6d",
+        "#cf4500",
+        "#3860be"
+      ]
+    }
+  ]
+}
