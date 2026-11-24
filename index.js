@@ -22,7 +22,9 @@ const PALETTES_FILE = path.join(HERE, 'palettes.json')
 let paletteCache = null
 
 export const name = 'dsh-diagram-leapavid'
-export const inject = ['webServer']
+// `connection` is DSH's own browser-trust service: every route below asks it
+// whether the caller is an authenticated DSH page before doing any work.
+export const inject = ['webServer', 'connection']
 
 function sendJson(res, status, value) {
   const body = JSON.stringify(value)
@@ -301,6 +303,17 @@ export function apply(ctx) {
     kind: 'prefix',
     path: ROUTE,
     handler: async (req, res) => {
+      // Host/Origin fence plus browser authentication, owned by the host. A page
+      // from another site, or a caller without a live authenticated Peer, is
+      // refused here before it can read specs or open a conversation.
+      const rejection = ctx.connection.requestRejection(req)
+      if (rejection !== undefined) {
+        sendJson(res, rejection, {
+          ok: false,
+          error: rejection === 401 ? '需要登录 DSH 才能使用图表工坊接口' : '请求来源未被 DSH 接受',
+        })
+        return
+      }
       try {
         const url = new URL(req.url || '/', 'http://localhost')
         const tail = url.pathname.slice(ROUTE.length) || '/'

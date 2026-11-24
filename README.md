@@ -69,9 +69,9 @@ LeapAvid图表工坊是一个 **DeepSeek Harness 客户端插件**。它把
 ### 从 npm 安装
 
 本插件已发布到 npm：[dsh-diagram-leapavid](https://www.npmjs.com/package/dsh-diagram-leapavid)。
-当前仓库版本为 **0.4.2**。
+当前仓库版本为 **0.4.3**。
 
-> 0.4.0 已发布到 npm，包含内置 `skill/` 规范、10 套配色、`/api/diagram-leapavid/prompt` 路由与默认精简注入。0.4.1 修正本段发布状态说明；0.4.2 更新 README 截图，去掉 DSH 左栏，内容页只保留一张详情截图。
+> 0.4.0 已发布到 npm，包含内置 `skill/` 规范、10 套配色、`/api/diagram-leapavid/prompt` 路由与默认精简注入。0.4.1 修正本段发布状态说明；0.4.2 更新 README 截图，去掉 DSH 左栏，内容页只保留一张详情截图。0.4.3 给三个宿主路由加上 DSH 自己的连接准入检查（`ctx.connection.requestRejection`）：Host/Origin 栅栏加浏览器登录态，只有宿主认可的页面能调用。
 
 ```bash
 dsh plugin --profile desktop add dsh-diagram-leapavid
@@ -156,7 +156,10 @@ skill/SKILL.md + references + templates ─┐
   风格、配色、内容与规范档位（`spec`）。默认 `compact`：拼出核心 SKILL 章节、
   style-guide、primitives、layout budget、type-*.md、去示例模板，并附按需查阅
   路径；`full`：把 semantic-patterns、output-spec 等全部参考内联。两者都可追加
-  一段覆盖 `style-guide` token 的品牌配色约束。
+  一段覆盖 `style-guide` token 的品牌配色约束。三个接口都先经过 DSH 自己的
+  Connection 准入（`ctx.connection.requestRejection`，Host/Origin 栅栏 + 浏览器
+  登录态）：只有宿主认可的页面能读到规范、配色或开新会话，浏览器里其它网页即使
+  知道地址也会被 401/403 拒绝。
 - `client.js` 是 DSH 的客户端 bundle：注册侧栏入口与面板，包含 React UI、样式，
   以及内联的图型文案 `DATA`、列表预览图 `PREVIEWS`、详情大图
   `PREVIEWS_DETAIL`。配色由 `/palettes` 接口读取，不内联。
